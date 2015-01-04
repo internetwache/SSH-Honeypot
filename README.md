@@ -14,7 +14,7 @@ This tool is a simple SSH server in Python which logs all username/password comb
 
 * You need to install the ```paramiko``` module. (e.g. ```sudo easy_install paramiko```)
 * Clone the repository. ```git clone https://github.com/internetwache/SSH-Honeypot.git``` and switch into the directory ```cd SSH-Honeypot```
-* Generate the keypair: ```ssh-keygen -t rsa -f server.key```
+* Generate the keypair: ```ssh-keygen -t rsa -f server.key``` and rename the server.key.pub to server.pub (```mv server.key.pub server.pub```)
 
 #Configuration
 
