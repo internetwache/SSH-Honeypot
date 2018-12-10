@@ -1,6 +1,9 @@
 #!/usr/bin/env python2.7
-import socket, sys, threading, thread
+import socket, sys, threading
 import paramiko
+
+if sys.version_info.major == 2 :
+    import thread
 
 #generate keys with 'ssh-keygen -t rsa -f server.key'
 HOST_KEY = paramiko.RSAKey(filename='server.key')
@@ -51,10 +54,16 @@ def main():
         while(True):
             try:
                 client_socket, client_addr = server_socket.accept()
-                thread.start_new_thread(handleConnection,(client_socket,))
+                if sys.version_info.major == 2 :
+                    thread.start_new_thread(handleConnection,(client_socket,))
+                elif sys.version_info.major == 3 :
+                    t = threading.Thread(target=handleConnection, args=(client_socket,))
+                    t.start()
+                else :
+                    print("Unknown python major version %d, exiting." % sys.version_info.major)
+                    sys.exit(1)
             except Exception as e:
-                print("ERROR: Client handling")
-                print(e)
+                print("ERROR handling client: %s" % e)
 
     except Exception as e:
         print("ERROR: Failed to create socket")
