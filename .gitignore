@@ -1,5 +1,8 @@
 # Created by https://www.gitignore.io
 
+# visual studio code:
+.vscode
+
 ### Project ###
 logins.txt
 server.key
