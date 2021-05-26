@@ -1,5 +1,8 @@
-#!/usr/bin/env python2.7
-import socket, sys, threading, thread
+#!/usr/bin/env python3
+import socket
+import sys
+import threading
+#import thread
 import paramiko
 
 #generate keys with 'ssh-keygen -t rsa -f server.key'
@@ -51,14 +54,13 @@ def main():
         while(True):
             try:
                 client_socket, client_addr = server_socket.accept()
-                thread.start_new_thread(handleConnection,(client_socket,))
+                t = threading.Thread(target=handleConnection, args=(client_socket,))
+                t.start()
             except Exception as e:
-                print("ERROR: Client handling")
-                print(e)
+                print("ERROR: Client handling", e)
 
     except Exception as e:
-        print("ERROR: Failed to create socket")
-        print(e)
+        print("ERROR: Failed to create socket", e)
         sys.exit(1)
 
 main()

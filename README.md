@@ -6,7 +6,7 @@ This tool is a simple SSH server in Python which logs all username/password comb
 #Requirements
 
 * ssh-keygen
-* python (2.7 or 3.0)
+* python (3.0)
 * python-setuptools
 * (iptables)
 
